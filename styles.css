@@ -1,0 +1,26 @@
+* {
+    margin: 0;
+    padding: 0;
+  }
+  .container {
+    background-color: #81ADC8;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+  }
+  
+  #grid {
+    height: 80vh;
+    width: 80vh;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(10, 10%);
+    grid-template-rows: repeat(10, 10%);
+    grid-gap: 0px;
+    background-color: #DEA47E;
+  }
+  
+  #snake {
+    background-color: #CD4631;
+    box-shadow: 0px 1px 10px 1px rgba(248, 242, 220, 1);
+  }
