@@ -23,4 +23,24 @@
   #snake {
     background-color: #CD4631;
     box-shadow: 0px 1px 10px 1px rgba(248, 242, 220, 1);
+    grid-area: 3 / 2 / 4 / 3;
   }
+
+  #game-over {
+    position: absolute;
+    font-family: 'East Sea Dokdo', cursive;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    height: 100vh;
+    width: 100%;
+    background-color: black;
+    opacity: .8;
+    z-index: -1
+    ;
+  }
+
+  #game-over p {
+    color: white;
+    font-size: 50px;
+}
