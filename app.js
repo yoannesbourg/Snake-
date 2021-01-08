@@ -5,6 +5,7 @@ let rowEnd = 3
 let columnEnd = 3
 const snake = document.getElementById('snake')
 const gameOver = document.getElementById('game-over')
+snake.style.setProperty(`grid-area`,`${rowStart} / ${columnStart} / ${rowEnd} / ${columnEnd}`)
 
 let keyHistory = []
 let lastDirection = 40
@@ -64,10 +65,38 @@ const moveLeft = () => {
     console.log('left!')
 }
 
+let stopSetTimeOut 
 
+const play = (event) => {
+    clearTimeout(stopSetTimeOut)
+    if(event) {
+        keyHistory.push(event.keyCode)
+    } else {
+        keyHistory.push(lastDirection)
+    }
 
+    
+
+    let eventLastHistoryCode = keyHistory[keyHistory.length - 1]
+    lastDirection = eventLastHistoryCode
+    setDirectionFromKeyTouch(lastDirection)
+    console.log({rowStart, columnStart, rowEnd, columnEnd})
+
+    if (rowStart === 0 || columnStart === 0 || rowStart === 11 || columnStart === 11) {
+        gameOverFunction()
+    } else {
+        stopSetTimeOut = setTimeout(play, 1000)
+    }
+  
+}
+
+const gameOverFunction = () => {
+    snake.style.setProperty('background-color','yellow')
+    document.removeEventListener('keydown', play)
+    gameOver.style.setProperty('z-index','1')
+}
 
 
 //setInterval(setDirectionFromKeyTouch(lastDirection), 1000) 
 
-document.addEventListener('keydown', getKeyCodeFromKeyTouch);
+document.addEventListener('keydown', play);

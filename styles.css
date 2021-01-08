@@ -22,9 +22,7 @@
   
   #snake {
     background-color: #CD4631;
-    box-shadow: 0px 1px 10px 1px rgba(248, 242, 220, 1);
-    grid-area: 3 / 2 / 4 / 3;
-  }
+    box-shadow: 0px 1px 10px 1px rgba(248, 242, 220, 1);  }
 
   #game-over {
     position: absolute;
