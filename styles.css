@@ -14,15 +14,18 @@
     width: 80vh;
     margin: 0 auto;
     display: grid;
-    grid-template-columns: repeat(10, 10%);
-    grid-template-rows: repeat(10, 10%);
     grid-gap: 0px;
     background-color: #DEA47E;
   }
   
   #snake {
     background-color: #CD4631;
-    box-shadow: 0px 1px 10px 1px rgba(248, 242, 220, 1);  }
+    box-shadow: 0px 1px 10px 1px rgba(248, 242, 220, 1);
+  }
+
+  #food {
+    background-color: #757575;
+  }
 
   #game-over {
     position: absolute;
