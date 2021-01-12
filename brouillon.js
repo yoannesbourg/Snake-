@@ -24,7 +24,6 @@ let stopSetTimeOut
 //History snake positions
 let keyHistory = []
 let lastDirection = 40
-let history = []
 //Get direction with keyCode and call moving functions
 const setDirectionFromKeyTouch = (eventKeyCode) => {
 
@@ -81,12 +80,9 @@ const play = (event) => {
     clearTimeout(stopSetTimeOut)
 
     //If event push keycode (for calling setdirection function) if not mantain last direction
-    if (event) {
-        keyHistory.push(event.keyCode)
-      } else {
-        keyHistory.push(lastDirection)
-        history.push({rowStart,columnStart})
-      }
+    event? keyHistory.push(event.keyCode) : keyHistory.push(lastDirection)
+
+    
     //Get last direction from history
     lastDirection = keyHistory[keyHistory.length - 1]
     
@@ -136,4 +132,4 @@ document.addEventListener('keydown', play);
 const newSnake = document.createElement('div')
 newSnake.setAttribute("class", "snake-test")
 grid.append(newSnake)
-//newSnake.style.
+newSnake.style.

@@ -7,6 +7,7 @@
     height: 100vh;
     display: flex;
     align-items: center;
+    flex-direction: column;
   }
   
   #grid {
@@ -21,6 +22,7 @@
   #snake {
     background-color: #CD4631;
     box-shadow: 0px 1px 10px 1px rgba(248, 242, 220, 1);
+    z-index: 10;
   }
 
   #food {
@@ -44,4 +46,16 @@
   #game-over p {
     color: white;
     font-size: 50px;
+}
+
+#counter {
+  height: 50px;
+  width: 50px;
+  display: flex;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid gray;
+  background-color: blanchedalmond;
+  margin-top: 50px;
 }
