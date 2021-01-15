@@ -1,3 +1,4 @@
+//Points
 let points = 0
 const counter = document.getElementById('counter')
 counter.innerHTML = `${points} points`
@@ -10,7 +11,6 @@ grid.style.setProperty('grid-template-rows',`repeat(${gridColumnsMax}, ${gridCol
 //Snake Initial position
 let rowStart = 2
 let columnStart = 2
-
 //Food position
 let foodRowStart 
 let foodColumnStart
@@ -23,7 +23,7 @@ let stopSetTimeOut
 //History snake positions
 let keyHistory = []
 let lastDirection = 40
-let history = []
+let history = [[2,2]]
 //Button replay
 const replay = document.getElementById('start-play')
 
@@ -51,10 +51,7 @@ const setDirectionFromKeyTouch = (eventKeyCode) => {
         default:
             
     }
-
-
 }
-
 
 //Moving functions
 const moveRight = () => {
@@ -77,8 +74,6 @@ const moveLeft = () => {
     snake.style.setProperty(`grid-area`,`${rowStart} / ${columnStart} / ${rowStart + 1} / ${columnStart + 1}`)
 }
 
-
-
 const play = (event) => {
     //Stop timeout for no cumulating movements
     clearTimeout(stopSetTimeOut)
@@ -86,31 +81,32 @@ const play = (event) => {
     //If event push keycode (for calling setdirection function) if not mantain last direction
     if (event) {
         keyHistory.push(event.keyCode)
+        
       } else {
         keyHistory.push(lastDirection)
-        history.push([rowStart,columnStart])
         console.log([rowStart,columnStart])
       }
+      history.push([rowStart,columnStart])
     //Get last direction from history
     lastDirection = keyHistory[keyHistory.length - 1]
-    
+    move()
     //Call setdirection function with 
-    setDirectionFromKeyTouch(lastDirection)
+    
 
     //If exciding the limit
     rowStart === 0 || columnStart === 0 || rowStart === gridColumnsMax + 1 || columnStart === gridColumnsMax + 1?  gameOverFunction() : stopSetTimeOut = setTimeout(play, 500)
-
+    
+    //Eat food
     if (rowStart === foodRowStart && columnStart === foodColumnStart) {
         generateRandomFoodCoordonates()
         raiseCounter()
     }
-    setNewSnakePosition()
-    
-    
-  
 }
 
-
+const move = () =>{
+    setDirectionFromKeyTouch(lastDirection)
+    setNewSnakePosition()
+}
 
 //Game over
 const gameOverFunction = () => {
@@ -132,12 +128,14 @@ const raiseCounter = () =>{
         counter.innerHTML = `${points += 1} points`
 }
 
-//Create new element
-const newSnakeElement = document.createElement('div')
-newSnakeElement.setAttribute("id", "snake-test")
-grid.append(newSnakeElement)
-const newSnake = document.getElementById('snake-test')
-newSnake.style.backgroundColor = 'red'
+//Create new snake element
+    const newSnakeElement = document.createElement('div')
+    newSnakeElement.setAttribute("id", "snake-test")
+    grid.append(newSnakeElement)
+    const newSnake = document.getElementById('snake-test')
+    newSnake.style.backgroundColor = 'red'
+
+// const create
 
 const setNewSnakePosition = () => {
  newSnake.style.setProperty(`grid-area`,`${history[history.length - 1][0]} / ${history[history.length - 1][1]} / ${history[history.length - 1][0] + 1} / ${history[history.length - 1][1] + 1}`)
@@ -157,5 +155,5 @@ const startPlaying = () => {
 }
 
 
-document.addEventListener('keydown', play);
+document.addEventListener('keydown', play)
 replay.addEventListener('click', startPlaying) 
