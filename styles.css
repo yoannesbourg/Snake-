@@ -1,51 +1,58 @@
 * {
-    margin: 0;
-    padding: 0;
-  }
-  .container {
-    background-color: #81ADC8;
-    height: 100vh;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-  }
-  
-  #grid {
-    height: 80vh;
-    width: 80vh;
-    margin: 0 auto;
-    display: grid;
-    grid-gap: 0px;
-    background-color: #DEA47E;
-  }
-  
-  #snake {
-    background-color: #CD4631;
-    box-shadow: 0px 1px 10px 1px rgba(248, 242, 220, 1);
-    z-index: 10;
-  }
+  margin: 0;
+  padding: 0;
+}
+.container {
+  background-color: #81ADC8;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
 
-  #food {
-    background-color: #757575;
-  }
+#grid {
+  height: 80vh;
+  width: 80vh;
+  margin: 0 auto;
+  display: grid;
+  grid-gap: 0px;
+  background-color: #DEA47E;
+}
 
-  #game-over {
-    position: absolute;
-    font-family: 'East Sea Dokdo', cursive;
-    align-items: center;
-    display: flex;
-    justify-content: center;
-    height: 100vh;
-    width: 100%;
-    background-color: black;
-    opacity: .8;
-    z-index: -1
-    ;
-  }
+#snake {
+  background-color: #CD4631;
+  box-shadow: 0px 1px 10px 1px rgba(248, 242, 220, 1);
+  z-index: 10;
+}
 
-  #game-over p {
-    color: white;
-    font-size: 50px;
+#food {
+  background-color: #757575;
+}
+
+#game-over {
+  position: absolute;
+  font-family: 'East Sea Dokdo', cursive;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100vh;
+  width: 100%;
+  background-color: black;
+  opacity: .8;
+  z-index: -1;
+}
+
+#game-over p {
+  color: white;
+  font-size: 50px;
+}
+
+button#start-play {
+  margin-top: 17px;
+  padding: 5px 20px;
+  border: none;
+  font-size: 20px;
 }
 
 #counter {

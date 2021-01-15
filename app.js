@@ -10,7 +10,6 @@ grid.style.setProperty('grid-template-rows',`repeat(${gridColumnsMax}, ${gridCol
 //Snake Initial position
 let rowStart = 2
 let columnStart = 2
-let isAte = false
 
 //Food position
 let foodRowStart 
@@ -25,6 +24,10 @@ let stopSetTimeOut
 let keyHistory = []
 let lastDirection = 40
 let history = []
+//Button replay
+const replay = document.getElementById('start-play')
+
+
 //Get direction with keyCode and call moving functions
 const setDirectionFromKeyTouch = (eventKeyCode) => {
 
@@ -46,7 +49,7 @@ const setDirectionFromKeyTouch = (eventKeyCode) => {
             break;
         
         default:
-            console.log('not this key')
+            
     }
 
 
@@ -85,7 +88,8 @@ const play = (event) => {
         keyHistory.push(event.keyCode)
       } else {
         keyHistory.push(lastDirection)
-        history.push({rowStart,columnStart})
+        history.push([rowStart,columnStart])
+        console.log([rowStart,columnStart])
       }
     //Get last direction from history
     lastDirection = keyHistory[keyHistory.length - 1]
@@ -100,6 +104,9 @@ const play = (event) => {
         generateRandomFoodCoordonates()
         raiseCounter()
     }
+    setNewSnakePosition()
+    
+    
   
 }
 
@@ -116,9 +123,7 @@ const gameOverFunction = () => {
 const generateRandomFoodCoordonates = () => {
     foodRowStart = Math.floor(Math.random() * gridColumnsMax + 1)
     foodColumnStart =  Math.floor(Math.random() * gridColumnsMax + 1)
-    foodRowEnd =  foodRowStart + 1
-    foodColumnEnd =  foodColumnStart + 1
-    food.style.setProperty(`grid-area`,`${foodRowStart} / ${foodColumnStart} / ${foodRowEnd} / ${foodColumnEnd}`)
+    food.style.setProperty(`grid-area`,`${foodRowStart} / ${foodColumnStart} / ${foodRowStart + 1} / ${foodColumnStart + 1}`)
 }
 generateRandomFoodCoordonates()
 
@@ -127,13 +132,30 @@ const raiseCounter = () =>{
         counter.innerHTML = `${points += 1} points`
 }
 
+//Create new element
+const newSnakeElement = document.createElement('div')
+newSnakeElement.setAttribute("id", "snake-test")
+grid.append(newSnakeElement)
+const newSnake = document.getElementById('snake-test')
+newSnake.style.backgroundColor = 'red'
+
+const setNewSnakePosition = () => {
+ newSnake.style.setProperty(`grid-area`,`${history[history.length - 1][0]} / ${history[history.length - 1][1]} / ${history[history.length - 1][0] + 1} / ${history[history.length - 1][1] + 1}`)
+}
+
+const startPlaying = () => {
+    let points = 0
+    let rowStart = 2
+    let columnStart = 2
+    let keyHistory = []
+    let history = []
+    gameOver.style.setProperty('z-index','-1')
+    snake.style.setProperty('background-color','#CD4631')
+    snake.style.setProperty(`grid-area`,`${rowStart} / ${columnStart} / ${rowStart + 1} / ${columnStart + 1}`)
+    play()
+    setNewSnakePosition()
+}
 
 
 document.addEventListener('keydown', play);
-
-//Create new element
-
-const newSnake = document.createElement('div')
-newSnake.setAttribute("class", "snake-test")
-grid.append(newSnake)
-//newSnake.style.
+replay.addEventListener('click', startPlaying) 
