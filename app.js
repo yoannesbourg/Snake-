@@ -1,5 +1,5 @@
 //Points
-let points = 2
+let points = 1
 const counter = document.getElementById('counter')
 counter.innerHTML = `${points} points`
 //Set grid size
@@ -103,35 +103,48 @@ const raiseCounter = () =>{
         counter.innerHTML = `${points += 1} points`
 }
 
+const startPlaying = () => {
+    points = 0
+    rowStart = 2
+    columnStart = 2
+    keyHistory = []
+    history = []
+    lastDirection = 40
+    gameOver.style.setProperty('z-index','-1')
+    snake.style.setProperty('background-color','#CD4631')
+    setGridArea(snake, rowStart, columnStart)
+    play()
+    // setNewSnakePosition()
+    }
+
 //Create new snake element
 // const newSnakeElement = document.createElement('div')
 // newSnakeElement.setAttribute("id", "snake-test")
 // grid.append(newSnakeElement)
 // const newSnake = document.getElementById('snake-test')
 // newSnake.style.backgroundColor = 'red'
-
-const setNewSnakePosition = (body, position) => {
-setGridArea(body, history[history.length - position][0], history[history.length - position][1])
+// let newDiv
+const createSnakeBody = (num) => {
+    newDiv = document.createElement('div')
+    newDiv.setAttribute('id', `snake-body-${num}`)
+    grid.append(newDiv)
+    newDiv.style.backgroundColor = 'red'
+    // setNewSnakePosition(newDiv)
 }
 
-const startPlaying = () => {
-points = 0
-rowStart = 2
-columnStart = 2
-keyHistory = []
-history = []
-lastDirection = 40
-gameOver.style.setProperty('z-index','-1')
-snake.style.setProperty('background-color','#CD4631')
-setGridArea(snake, rowStart, columnStart)
-play()
-setNewSnakePosition()
-}
+
+const snakeOne = document.getElementById('snake-body-1')
+const snakeTwo = document.getElementById('snake-body-2')
+const snakeThree = document.getElementById('snake-body-3')
+
+
 
 const move = () =>{
     setDirectionFromKeyTouch(lastDirection)
-    setNewSnakePosition()
 }
+const setNewSnakePosition = (div, index) => {
+    setGridArea(div, history[history.length - index][0], history[history.length - index][1])
+    }
 
 const play = (event) => {
     //Stop timeout for no cumulating movements
@@ -154,17 +167,12 @@ const play = (event) => {
     if (rowStart === foodRowStart && columnStart === foodColumnStart) {
         generateRandomFoodCoordonates()
         raiseCounter()
+        createSnakeBody(points)
     }
 }
 
 
-const createSnakeBody = () => {
-    let newDiv = document.createElement('div')
-    newDiv.setAttribute('id', `snake-body-${counter}`)
-    grid.append(newDiv)
-    newDiv.style.backgroundColor = 'red'
-    setNewSnakePosition(newDiv, counter)
-}
+
 
 //Create new snake element
 // const newSnakeElement = document.createElement('div')
@@ -174,3 +182,4 @@ const createSnakeBody = () => {
 // newSnake.style.backgroundColor = 'red'
 document.addEventListener('keydown', play)
 replay.addEventListener('click', startPlaying) 
+
