@@ -22,7 +22,7 @@ let stopSetTimeOut
 let keyHistory = []
 let lastDirection = 40
 let history = [[2,2]]
-let snakeTailIds = []
+let snakeTailIds = ['idtest']
 //Button replay
 const replay = document.getElementById('start-play')
 
@@ -127,11 +127,13 @@ const createSnakeBody = () => {
 }
 
 const moveTail = () => {
-    for (let i = 0; i < snakeTailIds.length; i++) {
-        let element = document.getElementById(snakeTailIds[i])
-        let rowHistory = history[history.length - i][0]
-        let columnHistory = history[history.length - i][1]
-        setGridArea(element,rowHistory,columnHistory)
+    for (let i = 1; i < snakeTailIds.length; i++) {
+            console.log(history[history.length - 1], 'index:' + i, history.length - 1)
+            let element = document.getElementById(snakeTailIds[i])
+            let rowHistory = history[history.length - i][0]
+            let columnHistory = history[history.length - i][1]
+            setGridArea(element,rowHistory,columnHistory)
+     
     }
 }
 
