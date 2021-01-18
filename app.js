@@ -1,5 +1,5 @@
 //Points
-let points = 1
+let points = 0
 const counter = document.getElementById('counter')
 counter.innerHTML = `${points} points`
 //Set grid size
@@ -22,6 +22,7 @@ let stopSetTimeOut
 let keyHistory = []
 let lastDirection = 40
 let history = [[2,2]]
+let snakeTailIds = []
 //Button replay
 const replay = document.getElementById('start-play')
 
@@ -114,33 +115,29 @@ const startPlaying = () => {
     snake.style.setProperty('background-color','#CD4631')
     setGridArea(snake, rowStart, columnStart)
     play()
-    // setNewSnakePosition()
     }
 
-//Create new snake element
-// const newSnakeElement = document.createElement('div')
-// newSnakeElement.setAttribute("id", "snake-test")
-// grid.append(newSnakeElement)
-// const newSnake = document.getElementById('snake-test')
-// newSnake.style.backgroundColor = 'red'
-// let newDiv
-const createSnakeBody = (num) => {
+const createSnakeBody = () => {
     newDiv = document.createElement('div')
-    newDiv.setAttribute('id', `snake-body-${num}`)
+    newDiv.setAttribute('id', `snake-body-${points}`)
     grid.append(newDiv)
     newDiv.style.backgroundColor = 'red'
-    // setNewSnakePosition(newDiv)
+    let elementId = newDiv.id
+    snakeTailIds.push(elementId)
 }
 
-
-const snakeOne = document.getElementById('snake-body-1')
-const snakeTwo = document.getElementById('snake-body-2')
-const snakeThree = document.getElementById('snake-body-3')
-
-
+const moveTail = () => {
+    for (let i = 0; i < snakeTailIds.length; i++) {
+        let element = document.getElementById(snakeTailIds[i])
+        let rowHistory = history[history.length - i][0]
+        let columnHistory = history[history.length - i][1]
+        setGridArea(element,rowHistory,columnHistory)
+    }
+}
 
 const move = () =>{
     setDirectionFromKeyTouch(lastDirection)
+    moveTail()
 }
 const setNewSnakePosition = (div, index) => {
     setGridArea(div, history[history.length - index][0], history[history.length - index][1])
@@ -171,15 +168,6 @@ const play = (event) => {
     }
 }
 
-
-
-
-//Create new snake element
-// const newSnakeElement = document.createElement('div')
-// newSnakeElement.setAttribute("id", "snake-test")
-// grid.append(newSnakeElement)
-// const newSnake = document.getElementById('snake-test')
-// newSnake.style.backgroundColor = 'red'
 document.addEventListener('keydown', play)
 replay.addEventListener('click', startPlaying) 
 
