@@ -1,7 +1,6 @@
 //Points
-let points = 0
+let points = 0 
 const counter = document.getElementById('counter')
-counter.innerHTML = `${points} points`
 //Set grid size
 const grid = document.getElementById('grid')
 const gridColumnsMax = 32
@@ -23,6 +22,13 @@ let keyHistory = []
 let lastDirection = 40
 let history = [[2,2]]
 let snakeTailIds = ['idtest']
+
+//Set counter 
+const setCounter = () => {
+    counter.innerHTML = `${points} points`
+}
+setCounter()
+
 //Button replay
 const replay = document.getElementById('start-play')
 
@@ -59,7 +65,7 @@ const setDirectionFromKeyTouch = (eventKeyCode) => {
             break;
         
         default:
-            
+            break;
     }
 }
 
@@ -106,15 +112,19 @@ const raiseCounter = () =>{
 
 const startPlaying = () => {
     points = 0
+    setCounter()
     rowStart = 2
     columnStart = 2
     keyHistory = []
-    history = []
+    history = [[2,2]]
     lastDirection = 40
+    deleteBody()
+    snakeTailIds = ['idtest']
+    
     gameOver.style.setProperty('z-index','-1')
     snake.style.setProperty('background-color','#CD4631')
     setGridArea(snake, rowStart, columnStart)
-    play()
+    document.addEventListener('keydown', play)
     }
 
 const createSnakeBody = () => {
@@ -137,6 +147,13 @@ const moveTail = () => {
     }
 }
 
+const deleteBody = () => {
+    for (let i = 1; i < snakeTailIds.length; i++) {
+        let element = document.getElementById(snakeTailIds[i])
+        element.remove()
+    }
+}
+
 const move = () =>{
     setDirectionFromKeyTouch(lastDirection)
     moveTail()
@@ -150,7 +167,10 @@ const play = (event) => {
     clearTimeout(stopSetTimeOut)
     //If event push keycode (for calling setdirection function) if not mantain last direction
     if (event) {
-        keyHistory.push(event.keyCode)
+        if (event.keyCode === 37 || event.keyCode === 38 || event.keyCode === 39 || event.keyCode === 40) {
+            keyHistory.push(event.keyCode)
+            console.log(event.keyCode)
+        }
         
     } else {
         keyHistory.push(lastDirection)
@@ -161,7 +181,7 @@ const play = (event) => {
     lastDirection = keyHistory[keyHistory.length - 1]
     move()
     //If exciding the limit
-    rowStart === 0 || columnStart === 0 || rowStart === gridColumnsMax + 1 || columnStart === gridColumnsMax + 1?  gameOverFunction() : stopSetTimeOut = setTimeout(play, 500)
+    rowStart === 0 || columnStart === 0 || rowStart === gridColumnsMax + 1 || columnStart === gridColumnsMax + 1?  gameOverFunction() : stopSetTimeOut = setTimeout(play, 100)
     //Eat food
     if (rowStart === foodRowStart && columnStart === foodColumnStart) {
         generateRandomFoodCoordonates()
@@ -169,6 +189,7 @@ const play = (event) => {
         createSnakeBody(points)
     }
 }
+
 
 document.addEventListener('keydown', play)
 replay.addEventListener('click', startPlaying) 
