@@ -1,13 +1,22 @@
+:root {
+  --white: #f8f8f2;
+  --background: #282a36;
+  --pink: #ff79c6;
+  --grey: #44475a;
+  --soft-grey: #ddd;
+  --purple: #bd93f9;
+}
+
 * {
   margin: 0;
   padding: 0;
 }
+
 .container {
-  background-color: #81ADC8;
+  background: linear-gradient(180deg, rgba(98,114,164,1) 0%, rgba(189,147,249,1) 92%);  
   height: 100vh;
   display: flex;
   align-items: center;
-  flex-direction: column;
 }
 
 #grid {
@@ -16,17 +25,17 @@
   margin: 0 auto;
   display: grid;
   grid-gap: 0px;
-  background-color: #DEA47E;
+  background-color:var(--background);
 }
 
 #snake {
-  background-color: #CD4631;
-  box-shadow: 0px 1px 10px 1px rgba(248, 242, 220, 1);
+  background-color: var(--pink);
+  /* box-shadow: 0px 1px 10px 1px rgba(248, 242, 220, 1); */
   z-index: 10;
 }
 
 #food {
-  background-color: #757575;
+  background-color: var(--grey);
 }
 
 #game-over {
@@ -38,13 +47,13 @@
   justify-content: center;
   height: 100vh;
   width: 100%;
-  background-color: black;
+  background-color: var(--background);
   opacity: .8;
   z-index: -1;
 }
 
 #game-over p {
-  color: white;
+  color: var(--white);
   font-size: 50px;
 }
 
@@ -56,13 +65,7 @@ button#start-play {
 }
 
 #counter {
-  height: 50px;
-  width: 50px;
-  display: flex;
-  text-align: center;
-  align-items: center;
-  justify-content: center;
-  border: 1px solid gray;
-  background-color: blanchedalmond;
-  margin-top: 50px;
+  color: var(--white);
+  grid-area: 32 / 1 / 33 / 4;
+  padding: 8px;
 }

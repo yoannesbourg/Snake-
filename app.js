@@ -122,7 +122,7 @@ const startPlaying = () => {
     snakeTailIds = ['idtest']
     
     gameOver.style.setProperty('z-index','-1')
-    snake.style.setProperty('background-color','#CD4631')
+    snake.style.setProperty('background-color','var(--pink)')
     setGridArea(snake, rowStart, columnStart)
     document.addEventListener('keydown', play)
     }
@@ -131,7 +131,7 @@ const createSnakeBody = () => {
     newDiv = document.createElement('div')
     newDiv.setAttribute('id', `snake-body-${points}`)
     grid.append(newDiv)
-    newDiv.style.backgroundColor = 'red'
+    newDiv.style.backgroundColor = 'var(--purple)'
     let elementId = newDiv.id
     snakeTailIds.push(elementId)
 }
