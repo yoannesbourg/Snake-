@@ -95,6 +95,8 @@ const gameOverFunction = () => {
     snake.style.setProperty('background-color','yellow')
     document.removeEventListener('keydown', play)
     gameOver.style.setProperty('z-index','1')
+    document.addEventListener('keydown', startPlayingOnEnter)
+
 }
 
 //Generate food in random position
@@ -120,7 +122,6 @@ const startPlaying = () => {
     lastDirection = 40
     deleteBody()
     snakeTailIds = ['idtest']
-    
     gameOver.style.setProperty('z-index','-1')
     snake.style.setProperty('background-color','var(--pink)')
     setGridArea(snake, rowStart, columnStart)
@@ -189,8 +190,18 @@ const play = (event) => {
         createSnakeBody(points)
     }
 }
+const startPlayingOnEnter = (event) => {
+    if (event.keyCode === 13) {
+        startPlaying()
+    }
+}
 
 
-document.addEventListener('keydown', play)
+document.addEventListener('keydown', play) 
 replay.addEventListener('click', startPlaying) 
+
+
+
+// replay.addEventListener('click', startPlaying) 
+
 
