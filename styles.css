@@ -67,5 +67,6 @@ button#start-play {
 #counter {
   color: var(--white);
   grid-area: 32 / 1 / 33 / 4;
-  padding: 8px;
+  padding: 0 8px;
+  width: 52px;
 }

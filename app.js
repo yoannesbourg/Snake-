@@ -144,7 +144,6 @@ const moveTail = () => {
             let rowHistory = history[history.length - i][0]
             let columnHistory = history[history.length - i][1]
             setGridArea(element,rowHistory,columnHistory)
-     
     }
 }
 
@@ -161,18 +160,17 @@ const move = () =>{
 }
 const setNewSnakePosition = (div, index) => {
     setGridArea(div, history[history.length - index][0], history[history.length - index][1])
-    }
+}
 
 const play = (event) => {
     //Stop timeout for no cumulating movements
     clearTimeout(stopSetTimeOut)
+
     //If event push keycode (for calling setdirection function) if not mantain last direction
     if (event) {
         if (event.keyCode === 37 || event.keyCode === 38 || event.keyCode === 39 || event.keyCode === 40) {
             keyHistory.push(event.keyCode)
-            console.log(event.keyCode)
         }
-        
     } else {
         keyHistory.push(lastDirection)
     }
@@ -181,8 +179,10 @@ const play = (event) => {
     //Get last direction from history
     lastDirection = keyHistory[keyHistory.length - 1]
     move()
+
     //If exciding the limit
     rowStart === 0 || columnStart === 0 || rowStart === gridColumnsMax + 1 || columnStart === gridColumnsMax + 1?  gameOverFunction() : stopSetTimeOut = setTimeout(play, 100)
+   
     //Eat food
     if (rowStart === foodRowStart && columnStart === foodColumnStart) {
         generateRandomFoodCoordonates()
@@ -199,9 +199,4 @@ const startPlayingOnEnter = (event) => {
 
 document.addEventListener('keydown', play) 
 replay.addEventListener('click', startPlaying) 
-
-
-
-// replay.addEventListener('click', startPlaying) 
-
 
