@@ -132,7 +132,7 @@ const createSnakeBody = () => {
     newDiv = document.createElement('div')
     newDiv.setAttribute('id', `snake-body-${points}`)
     grid.append(newDiv)
-    newDiv.style.backgroundColor = 'var(--purple)'
+    newDiv.style.backgroundColor = 'var(--pink)'
     let elementId = newDiv.id
     snakeTailIds.push(elementId)
 }

@@ -26,6 +26,7 @@
   display: grid;
   grid-gap: 0px;
   background-color:var(--background);
+  position: relative;
 }
 
 #snake {
@@ -67,6 +68,8 @@ button#start-play {
 #counter {
   color: var(--white);
   grid-area: 32 / 1 / 33 / 4;
-  padding: 0 8px;
   width: 52px;
+  position:absolute;
+  bottom: 0;
+  padding: 0 0 8px 8px;
 }
